@@ -5,8 +5,10 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 function Home() {
+  const [sending, setSending] = useState(false);
   const defaultIcon = L.icon({
     iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
     iconSize: [25, 41],
@@ -20,12 +22,14 @@ function Home() {
   function sendEmail(e) {
     e.preventDefault();  
 
+    setSending(true); 
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
     const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
     const userId = process.env.REACT_APP_EMAILJS_USER_ID;
 
     emailjs.sendForm(serviceId, templateId, e.target, userId)
       .then((result) => {
+        setSending(false);
         Swal.fire({
           title: 'Message has been sent!',
           icon:'success',
@@ -34,6 +38,7 @@ function Home() {
           window.location.reload() 
         });
       }, (error) => {
+        setSending(false);
         Swal.fire({
           title: 'Message was not sent...',
           icon:'error',
@@ -79,10 +84,8 @@ function Home() {
                 <input type='text' placeholder='Subject' name="subject" required/>
                 <textarea placeholder='Message' name="html_message" required/>
                 <div className='div-button'>
-                  <button id='email-button'>
-                    Send Message!
-                  </button>
-            </div>
+                  {sending ? <span class="loader"></span> :<button id='email-button' type="submit" >Send Message!</button>}
+                </div>
               </form>
             </div>
             <span className='After form-after'></span>
