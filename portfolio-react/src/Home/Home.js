@@ -213,7 +213,7 @@ function Home() {
               </a>
             </li>
             <li>
-              <a className="instagram" title="Instagram" target="_blank" href="https://github.com/Andre6738">
+              <a className="instagram" title="Instagram" target="_blank" href="https://www.instagram.com/andre_croukamp/">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -222,7 +222,7 @@ function Home() {
               </a>
             </li>
             <li>
-              <a className="github" title="GitHub" target="_blank" href="#">
+              <a className="github" title="GitHub" target="_blank" href="https://github.com/Andre6738">
                 <span></span>
                 <span></span>
                 <span></span>
